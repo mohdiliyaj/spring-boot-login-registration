@@ -24,7 +24,6 @@ public class StudentController {
 	
 	@PostMapping("/login")
 	public String checkLogin(@ModelAttribute Student s, Model model) {
-		System.out.println(s.getStudentEmail() +""+s.getStudentPassword());
 		Student checkLogin = studentService.checkLogin(s);
 		if(checkLogin.getStudentId() != null) {
 			return "redirect:/dashboard";
