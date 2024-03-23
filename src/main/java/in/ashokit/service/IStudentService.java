@@ -9,4 +9,6 @@ public interface IStudentService {
 	public Student checkLogin(Student s);
 	
 	public boolean getStudentByEmail(String email);
+	
+	public boolean sendForgetPassword(String email);
 }

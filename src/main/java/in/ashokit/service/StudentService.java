@@ -45,5 +45,27 @@ public class StudentService implements IStudentService {
 		 Student byStudentEmail = studentRepo.findByStudentEmail(email);
 		 return byStudentEmail != null ? true : false;
 	}
+	
+	@Override
+	public boolean sendForgetPassword(String email) {
+		
+		Student byStudentEmail = studentRepo.findByStudentEmail(email);
+		if(byStudentEmail != null) {
+			
+			String subject = "Recover your password - AshokIT";
+			String body = "<h1>Password Reset Request</h1>"
+					+ "<p>Hello "+ byStudentEmail.getStudentName() +"</p><br/>"
+					+ "<p>We have received a request to recover your password.</p>"
+					+ "<p>Your password is : <b>" + byStudentEmail.getStudentPassword() +"</b></p>"
+					+ "<p>If you have any questions or concerns, please contact us.</p><br/>"
+					+ "<p>Thank you,</p>"
+					+ "<p>AshokIT</p>";
+			
+			mailUtil.sendForgetMail(subject, body, email);
+			return true;
+		}else {
+			return false;
+		}
+	}
 
 }
