@@ -38,5 +38,12 @@ public class StudentService implements IStudentService {
 	public Student checkLogin(Student s) {
 		return studentRepo.findByStudentEmailAndStudentPassword(s.getStudentEmail(), s.getStudentPassword());
 	}
+	
+	
+	@Override
+	public boolean getStudentByEmail(String email) {
+		 Student byStudentEmail = studentRepo.findByStudentEmail(email);
+		 return byStudentEmail != null ? true : false;
+	}
 
 }

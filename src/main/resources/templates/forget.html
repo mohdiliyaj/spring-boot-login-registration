@@ -36,7 +36,7 @@
 		</nav>
 	</header>
 
-	<section class="login-page h-100" style="background-color: #fcfcfc;">
+	<section class="login-page" style="background-color: #fcfcfc; height: 83.9vh;">
 		<div class="container py-5 h-100">
 			<div class="row d-flex justify-content-center align-items-center h-100">
 				<div class="col-xl-5">
@@ -45,26 +45,19 @@
 							<div class="text-center">
 								<img src="/images/logo.png" alt="logo">
 								<h4 class="mt-1 pb-1">Ashok Institute of Technology</h4>
-								<p>Please login to your account</p>
-								<p class="mb-0 text-danger" th:text="${msg}"></p>
+								<p>Recover your account password</p>
+								<p class="mb-0 text-success" th:text="${succMsg}"></p>
+								<p class="mb-0 text-danger" th:text="${errMsg}"></p>
 							</div>
-							<form th:object="${student}" th:action="@{/login}" method="post" class="needs-validation"
+							<form th:action="@{/forget}" method="post" class="needs-validation"
 								novalidate>
 								<div class="form-outline mb-3">
 									<label class="form-label" for="userEmail">Email or username</label>
 									<input type="email" id="userEmail" class="form-control"
-										placeholder="Email address or username" th:field="*{studentEmail}" required />
-								</div>
-								<div class="form-outline mb-3">
-									<label class="form-label" for="userPassword">Password</label>
-									<input type="password" id="userPassword" class="form-control "
-										placeholder="Password" th:field="*{studentPassword}" required />
+										placeholder="Email address or username" name="email" required />
 								</div>
 								<div class="pb-4">
 									<input type="submit" value="Login" class="btn btn-primary w-100" />
-								</div>
-								<div class="pb-4 text-center">
-									<a th:href="@{/forget}" class="text-decoration-none">Forget Password</a>
 								</div>
 							</form>
 						</div>

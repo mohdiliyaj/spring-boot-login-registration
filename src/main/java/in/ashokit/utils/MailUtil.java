@@ -4,7 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMailMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+
+import jakarta.mail.internet.MimeMessage;
 
 
 @Component
@@ -17,7 +21,6 @@ public class MailUtil {
 	private String fromEmail;
 	
 	public boolean sendMail(String subject, String body, String email) {
-		boolean isSent = false;
 		try {
 			SimpleMailMessage message = new SimpleMailMessage();
 			message.setFrom(fromEmail);
@@ -25,10 +28,25 @@ public class MailUtil {
 			message.setSubject(subject);
 			message.setText(body);
 			mailSender.send(message);
-			isSent = false;
+			return true;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return isSent;
+		return false;
+	}
+	
+	public boolean sendForgetMail(String subject, String body, String email) {
+		try {
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+			helper.setTo(email);
+			helper.setSubject(subject);
+			helper.setText(body, true);
+			mailSender.send(mimeMessage);			
+			return true;
+		}catch(Exception e ){
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

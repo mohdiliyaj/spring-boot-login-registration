@@ -7,4 +7,6 @@ public interface IStudentService {
 	public boolean saveStudent(Student s);
 	
 	public Student checkLogin(Student s);
+	
+	public boolean getStudentByEmail(String email);
 }
